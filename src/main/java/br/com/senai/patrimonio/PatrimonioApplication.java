@@ -1,5 +1,6 @@
 package br.com.senai.patrimonio;
 
+import br.com.senai.patrimonio.model.Bloco;
 import br.com.senai.patrimonio.model.Empresa;
 import br.com.senai.patrimonio.model.Endereco;
 import br.com.senai.patrimonio.model.Pessoa;
@@ -30,8 +31,6 @@ public class PatrimonioApplication {
 		System.out.println(enderecoComArgumentos.getBairro());
 
 		Pessoa pessoa = new Pessoa();
-		pessoa.setId(1L);
-
 
 		Pessoa pessoaComArgumentos = new Pessoa(1L, "Otávio", "123.456.789-00");
 		System.out.println(pessoaComArgumentos.getNome());
@@ -42,6 +41,14 @@ public class PatrimonioApplication {
 		empresa.setPessoa(pessoaComArgumentos);
 		System.out.println(empresa.getPessoa().getCpf());
 		System.out.println(empresa.getPessoa().getNome());
+
+		Bloco bloco = new Bloco();
+
+		Bloco blocoComArgumentos = new Bloco(2L, "Bloco 1", empresa);
+		System.out.println(blocoComArgumentos.getNome());
+
+		empresa.setBloco(blocoComArgumentos);
+		System.out.println(empresa.getBloco().getNome());
 	}
 
 }
