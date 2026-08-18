@@ -13,6 +13,7 @@ public class Empresa {
     @Embedded
     private Endereco endereco;
     private Pessoa pessoa;
+    private Bloco bloco;
 
     public Empresa() {}
 
@@ -78,5 +79,13 @@ public class Empresa {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public Bloco getBloco() {
+        return bloco;
+    }
+
+    public void setBloco(Bloco bloco) {
+        this.bloco = bloco;
     }
 }
