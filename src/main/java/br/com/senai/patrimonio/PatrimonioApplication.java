@@ -2,6 +2,7 @@ package br.com.senai.patrimonio;
 
 import br.com.senai.patrimonio.model.Empresa;
 import br.com.senai.patrimonio.model.Endereco;
+import br.com.senai.patrimonio.model.Pessoa;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,23 +17,31 @@ public class PatrimonioApplication {
 		System.out.println(empresa.getRazaoSocial());
 
 		Endereco endereco = new Endereco();
-		endereco.setRua("Rua General Lauro Sodré");
+		endereco.setRua("Bela vista");
 		System.out.println(endereco.getRua());
-
-		endereco.setNumero("Nº 300");
-		System.out.println(endereco.getNumero());
-
-		endereco.setComplemento("Sem Complemento");
-		System.out.println(endereco.getComplemento());
-
-		endereco.setBairro("Comerciário");
 		System.out.println(endereco.getBairro());
 
-		endereco.setCidade("Criciúma");
-		System.out.println(endereco.getCidade());
+		empresa.setEndereco(endereco);
+		System.out.println(empresa.getEndereco().getRua());
 
-		endereco.setEstado("Santa Catarina");
-		System.out.println(endereco.getEstado());
+		Endereco enderecoComArgumentos = new Endereco("Líbano jose gomes",
+				"489", "Perto do posto de saúde",
+				"Santa luzia","Criciúma", "SC");
+		System.out.println(enderecoComArgumentos.getBairro());
+
+		Pessoa pessoa = new Pessoa();
+		pessoa.setId(1L);
+
+
+		Pessoa pessoaComArgumentos = new Pessoa(1L, "Otávio", "123.456.789-00");
+		System.out.println(pessoaComArgumentos.getNome());
+
+		System.out.println(pessoaComArgumentos.getId());
+		System.out.println(pessoaComArgumentos.getNome());
+
+		empresa.setPessoa(pessoaComArgumentos);
+		System.out.println(empresa.getPessoa().getCpf());
+		System.out.println(empresa.getPessoa().getNome());
 	}
 
 }
