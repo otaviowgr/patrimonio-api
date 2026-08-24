@@ -14,6 +14,7 @@ public class Empresa {
     private Endereco endereco;
     private Pessoa pessoa;
     private Bloco bloco;
+    private Sala sala;
 
     public Empresa() {}
 
@@ -87,5 +88,13 @@ public class Empresa {
 
     public void setBloco(Bloco bloco) {
         this.bloco = bloco;
+    }
+
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
     }
 }
