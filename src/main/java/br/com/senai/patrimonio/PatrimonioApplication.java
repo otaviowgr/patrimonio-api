@@ -1,9 +1,6 @@
 package br.com.senai.patrimonio;
 
-import br.com.senai.patrimonio.model.Bloco;
-import br.com.senai.patrimonio.model.Empresa;
-import br.com.senai.patrimonio.model.Endereco;
-import br.com.senai.patrimonio.model.Pessoa;
+import br.com.senai.patrimonio.model.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -49,6 +46,12 @@ public class PatrimonioApplication {
 
 		empresa.setBloco(blocoComArgumentos);
 		System.out.println(empresa.getBloco().getNome());
+
+		Sala sala = new Sala();
+
+		Sala salaComArgumentos = new Sala(1L, "Otávio", "QR Code", bloco, empresa);
+		System.out.println(sala.getNome());
+		System.out.println(salaComArgumentos.getNome());
 	}
 
 }
