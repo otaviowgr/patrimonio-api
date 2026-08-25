@@ -1,6 +1,7 @@
 package br.com.senai.patrimonio;
 
 import br.com.senai.patrimonio.model.*;
+import br.com.senai.patrimonio.model.enums.Cargo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -52,6 +53,15 @@ public class PatrimonioApplication {
 		Sala salaComArgumentos = new Sala(1L, "Otávio", "QR Code", bloco, empresa);
 		System.out.println(sala.getNome());
 		System.out.println(salaComArgumentos.getNome());
-	}
 
+		Bem bem = new Bem();
+
+		Bem bemComArgumentos = new Bem(2L, "Wilson", "Código: 1234", empresa);
+		System.out.println(bem.getNome());
+		System.out.println(bemComArgumentos.getNome());
+
+		Funcionario funcionario = new Funcionario(
+				35L, "Cleison", "123",
+				Cargo.GERENTE, sala, empresa);
+	}
 }
