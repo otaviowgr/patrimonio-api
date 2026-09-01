@@ -2,6 +2,8 @@ package br.com.senai.patrimonio;
 
 import br.com.senai.patrimonio.model.*;
 import br.com.senai.patrimonio.model.enums.Cargo;
+import br.com.senai.patrimonio.model.enums.Pagamento;
+import br.com.senai.patrimonio.model.enums.PagamentoComposto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -63,5 +65,9 @@ public class PatrimonioApplication {
 		Funcionario funcionario = new Funcionario(
 				35L, "Cleison", "123",
 				Cargo.GERENTE, sala, empresa);
+
+		System.out.println(Pagamento.PIX);
+		System.out.println(PagamentoComposto.PIX.getDescricao());
+		System.out.println(PagamentoComposto.BOLETO.getSituacao());
 	}
 }
