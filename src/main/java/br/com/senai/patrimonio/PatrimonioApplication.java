@@ -1,5 +1,10 @@
 package br.com.senai.patrimonio;
 
+import br.com.senai.patrimonio.avaliacao.Curso;
+import br.com.senai.patrimonio.avaliacao.Evento;
+import br.com.senai.patrimonio.avaliacao.Participante;
+import br.com.senai.patrimonio.avaliacao.enums.Nivel;
+import br.com.senai.patrimonio.avaliacao.enums.StatusEvento;
 import br.com.senai.patrimonio.model.*;
 import br.com.senai.patrimonio.model.enums.Cargo;
 import br.com.senai.patrimonio.model.enums.Pagamento;
@@ -69,5 +74,26 @@ public class PatrimonioApplication {
 		System.out.println(Pagamento.PIX);
 		System.out.println(PagamentoComposto.PIX.getDescricao());
 		System.out.println(PagamentoComposto.BOLETO.getSituacao());
+
+		Participante participante = new Participante("Otávio", "otaviowgr@gmail.com", "+55 (48) 99912 2525", "Nº de Matrícula: 1", Nivel.AVANCADO);
+		System.out.println("\n- Nome: " + participante.getNome());
+		System.out.println("- Email: " + participante.getEmail());
+		System.out.println("- Telefone: " + participante.getTelefone());
+		System.out.println("- Matricula: " + participante.getMatricula());
+		System.out.println("- Nivel: " + participante.getNivel());
+
+		Evento evento = new Evento(1, "Evento do Otávio", "Minha Casa", StatusEvento.EVENTO_PLANEJADO, participante);
+		System.out.println("\n- Nome do Evento: " + evento.getNome());
+		System.out.println("- Local do Evento: " + evento.getLocal());
+		System.out.println("- Status do Evento: " + evento.getStatus().getDescricao());
+		System.out.println("-Responsável pelo Evento: " + evento.getResponsavel().getNome());
+
+		Curso curso = new Curso(1, "Curso de Programação", "SENAI", StatusEvento.INSCRICOES_ABERTAS, participante, 200, "Hezequias", 10);
+		System.out.println("\n- Nome do Curso: " + curso.getNome());
+		System.out.println("- Local do Curso: " + curso.getLocal());
+		System.out.println("- Status do Curso: " + curso.getStatus().getDescricao());
+		System.out.println("- Carga Horária: " + curso.getCargaHoraria());
+		System.out.println("- Nome do Instrutor: " + curso.getInstrutor());
+		System.out.println("- Quantidade de vagas disponiveis: " + curso.getQuantidadeVagas());
 	}
 }
