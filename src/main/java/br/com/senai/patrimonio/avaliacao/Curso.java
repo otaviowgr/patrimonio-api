@@ -9,6 +9,11 @@ public class Curso extends Evento {
 
     public Curso() {}
 
+    @Override
+    public void iniciar() {
+        System.out.println("Iniciando Curso...");
+    }
+
     public Curso(int codigo, String nome, String local, StatusEvento status, Participante resposanvel, int cargaHoraria, String instrutor, int quantidadeVagas) {
         super(codigo, nome, local, status, resposanvel);
         this.cargaHoraria = cargaHoraria;
