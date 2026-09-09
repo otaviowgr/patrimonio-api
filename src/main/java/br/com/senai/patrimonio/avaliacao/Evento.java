@@ -27,6 +27,10 @@ public class Evento {
         this.codigo = codigo;
     }
 
+    public void iniciar() {
+        System.out.println("Iniciando Evento...");
+    }
+
     public String getNome() {
         return nome;
     }
