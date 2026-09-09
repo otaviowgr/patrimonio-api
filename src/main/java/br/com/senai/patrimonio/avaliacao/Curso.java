@@ -3,6 +3,9 @@ package br.com.senai.patrimonio.avaliacao;
 import br.com.senai.patrimonio.avaliacao.enums.StatusEvento;
 
 public class Curso extends Evento {
+    public void programacao() {
+        System.out.println("Curso de Programação");
+    }
     private int cargaHoraria;
     private String instrutor;
     private int quantidadeVagas;

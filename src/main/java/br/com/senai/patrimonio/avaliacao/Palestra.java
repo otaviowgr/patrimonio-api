@@ -1,7 +1,8 @@
 package br.com.senai.patrimonio.avaliacao;
 
+import java.util.List;
+
 public class Palestra extends Evento{
-    @Override
     public void iniciar() {
         System.out.println("Iniciando Palestra...");
     }
