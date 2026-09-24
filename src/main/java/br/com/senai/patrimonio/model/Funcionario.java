@@ -1,7 +1,7 @@
 package br.com.senai.patrimonio.model;
 import br.com.senai.patrimonio.model.enums.Cargo;
 
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa implements Localizavel {
     private Cargo cargo;
     private Empresa empresa;
     private Sala salasResponsavel;
@@ -21,6 +21,9 @@ public class Funcionario extends Pessoa {
         this.empresa = empresa;
     }
 
-
+    @Override
+    public String getDescricaoLocalzavel() {
+        return "Responsabilidade de " + getNome() + " (" + cargo + ")";
+    }
 }
 
