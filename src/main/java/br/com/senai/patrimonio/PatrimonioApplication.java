@@ -7,10 +7,13 @@ import br.com.senai.patrimonio.avaliacao.enums.Nivel;
 import br.com.senai.patrimonio.avaliacao.enums.StatusEvento;
 import br.com.senai.patrimonio.model.*;
 import br.com.senai.patrimonio.model.enums.Cargo;
+import br.com.senai.patrimonio.model.enums.EstadoConservacao;
 import br.com.senai.patrimonio.model.enums.Pagamento;
 import br.com.senai.patrimonio.model.enums.PagamentoComposto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.time.LocalDate;
 
 @SpringBootApplication
 public class PatrimonioApplication {
@@ -18,7 +21,7 @@ public class PatrimonioApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PatrimonioApplication.class, args);
 
-		Empresa empresa = new Empresa();
+		/* Empresa empresa = new Empresa();
 		empresa.setRazaoSocial("Senai LTDA");
 		System.out.println(empresa.getRazaoSocial());
 
@@ -94,6 +97,34 @@ public class PatrimonioApplication {
 		System.out.println("- Status do Curso: " + curso.getStatus().getDescricao());
 		System.out.println("- Carga Horária: " + curso.getCargaHoraria());
 		System.out.println("- Nome do Instrutor: " + curso.getInstrutor());
-		System.out.println("- Quantidade de vagas disponiveis: " + curso.getQuantidadeVagas());
+		System.out.println("- Quantidade de vagas disponiveis: " + curso.getQuantidadeVagas()); */
+
+		Empresa empresaInterface =  new Empresa();
+
+		Bloco blocoInterface = new Bloco(1L, "Bloco 1", empresaInterface);
+
+		Sala salaInterface = new Sala(2L, "Lab. 2", "45678", blocoInterface, empresaInterface);
+
+		System.out.println(salaInterface.getDescricaoLocalzavel());
+
+		Patrimonio patrimonioInterface = new Patrimonio();
+
+		Bem bemInterface = new Bem();
+		patrimonioInterface.setBem(bemInterface);
+
+		patrimonioInterface.setDataAquisicao(LocalDate.now());
+		patrimonioInterface.setEstado(EstadoConservacao.NOVO);
+
+		System.out.println("Data de Aquisição: " + patrimonioInterface.getDataAquisicao());
+		System.out.println(patrimonioInterface.getBuscaConservacao());
+
+		Bem bemNovaInterface = new Bem();
+		patrimonioInterface.setBem(bemNovaInterface);
+
+		patrimonioInterface.setDataAquisicao(LocalDate.now());
+		patrimonioInterface.setEstado(null);
+
+		System.out.println("Data de Aquisição: " + patrimonioInterface.getDataAquisicao());
+		System.out.println(patrimonioInterface.getBuscaConservacao());
 	}
 }

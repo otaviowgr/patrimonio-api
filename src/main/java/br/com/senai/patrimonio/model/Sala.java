@@ -61,6 +61,6 @@ public class Sala implements Localizavel {
     public String getDescricaoLocalzavel() {
                             /* SE bloco for DIFERENTE de NULO ENTAO bloco.getNome() SENAO "Sem bloco"*/
         String nomeBloco = bloco != null ? bloco.getNome() : "Sem bloco!";
-        return "Sala " + this.nome + "(Bloco " +  nomeBloco + ")";
+        return "Sala: " + this.nome + "(Bloco: " +  nomeBloco + ")";
     }
 }

@@ -1,6 +1,6 @@
 package br.com.senai.patrimonio.model;
 
-public class Endereco {
+public class Endereco implements BuscarEmpresaVinculada {
     private String rua;
     private String numero;
     private String complemento;
@@ -78,5 +78,10 @@ public class Endereco {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String getEmpresaVinculada() {
+        String empresaVinculada = n
     }
 }
