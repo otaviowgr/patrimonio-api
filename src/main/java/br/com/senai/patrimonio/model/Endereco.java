@@ -82,6 +82,11 @@ public class Endereco implements BuscarEmpresaVinculada {
 
     @Override
     public String getEmpresaVinculada() {
-        String empresaVinculada = n
+        String enderecoEmpresa = rua != null ? rua : "Sem Rua Cadastrada";
+        enderecoEmpresa += numero != null ? ", " + numero : ", Sem Número Cadastrado";
+        enderecoEmpresa += bairro != null ? ", " + bairro : ", Sem Bairro Cadastrado";
+        enderecoEmpresa += cidade != null ? ", " + cidade : ", Sem Cidade Cadastrada";
+        enderecoEmpresa += estado != null ? ", " + estado : ", Sem Estado Cadastrado";
+        return enderecoEmpresa;
     }
 }

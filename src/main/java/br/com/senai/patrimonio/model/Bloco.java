@@ -1,6 +1,6 @@
 package br.com.senai.patrimonio.model;
 
-public class Bloco {
+public class Bloco implements BuscarEmpresaVinculada {
     private Long id;
     private String nome;
     private Empresa empresa;
@@ -35,5 +35,16 @@ public class Bloco {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    @Override
+    public String getEmpresaVinculada() {
+        if (empresa != null) {
+            String nomeEmpresa = empresa.getNome() != null ? empresa.getNome() : "Empresa sem nome";
+            String cnpjEmpresa = empresa.getCnpj() != null ? empresa.getCnpj() : "CNPJ não informado";
+            return "Bloco: " + nome + ", Empresa: " + nomeEmpresa + ", CNPJ: " + cnpjEmpresa;
+        } else {
+            return "Bloco: " + nome + ", Empresa: Não vinculada";
+        }
     }
 }

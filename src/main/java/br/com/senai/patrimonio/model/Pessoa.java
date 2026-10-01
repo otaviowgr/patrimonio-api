@@ -1,6 +1,6 @@
 package br.com.senai.patrimonio.model;
 
-public class Pessoa {
+public class Pessoa implements BuscarEmpresaVinculada {
     private Long id;
     private String nome;
     private String cpf;
@@ -35,5 +35,12 @@ public class Pessoa {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    @Override
+    public String getEmpresaVinculada() {
+        String nomePessoa = nome != null ? nome : "Pessoa sem nome";
+        String cpfPessoa = cpf != null ? cpf : "CPF não informado";
+        return "Pessoa: " + nomePessoa + ", CPF: " + cpfPessoa;
     }
 }

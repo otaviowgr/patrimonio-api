@@ -1,17 +1,11 @@
 package br.com.senai.patrimonio;
 
-import br.com.senai.patrimonio.avaliacao.Curso;
-import br.com.senai.patrimonio.avaliacao.Evento;
-import br.com.senai.patrimonio.avaliacao.Participante;
-import br.com.senai.patrimonio.avaliacao.enums.Nivel;
-import br.com.senai.patrimonio.avaliacao.enums.StatusEvento;
 import br.com.senai.patrimonio.model.*;
-import br.com.senai.patrimonio.model.enums.Cargo;
 import br.com.senai.patrimonio.model.enums.EstadoConservacao;
-import br.com.senai.patrimonio.model.enums.Pagamento;
-import br.com.senai.patrimonio.model.enums.PagamentoComposto;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 
@@ -19,112 +13,63 @@ import java.time.LocalDate;
 public class PatrimonioApplication {
 
 	public static void main(String[] args) {
+		// Apenas inicia a aplicação Spring Boot
 		SpringApplication.run(PatrimonioApplication.class, args);
+	}
 
-		/* Empresa empresa = new Empresa();
-		empresa.setRazaoSocial("Senai LTDA");
-		System.out.println(empresa.getRazaoSocial());
+	// Isola os testes aqui dentro de forma limpa e organizada
+	@Bean
+	public CommandLineRunner executarTestes() {
+		return args -> {
+			System.out.println("\n========================================");
+			System.out.println("INICIANDO TESTES DAS INTERFACES E MODELOS");
+			System.out.println("========================================\n");
 
-		Endereco endereco = new Endereco();
-		endereco.setRua("Bela vista");
-		System.out.println(endereco.getRua());
-		System.out.println(endereco.getBairro());
+			// 1. Testando Sala e Bloco com ‘Interfaces’
+			Empresa empresaInterface = new Empresa();
+			Bloco blocoInterface = new Bloco(1L, "Bloco 1", empresaInterface);
+			Sala salaInterface = new Sala(2L, "Lab. 2", "45678", blocoInterface, empresaInterface);
 
-		empresa.setEndereco(endereco);
-		System.out.println(empresa.getEndereco().getRua());
+			System.out.println("-> Descrição Localizável da Sala:");
+			System.out.println(salaInterface.getDescricaoLocalzavel());
 
-		Endereco enderecoComArgumentos = new Endereco("Líbano jose gomes",
-				"489", "Perto do posto de saúde",
-				"Santa luzia","Criciúma", "SC");
-		System.out.println(enderecoComArgumentos.getBairro());
+			// 2. Testando Patrimônio com Estado de Conservação (Novo)
+			Patrimonio patrimonioInterface = new Patrimonio();
+			patrimonioInterface.setBem(new Bem());
+			patrimonioInterface.setDataAquisicao(LocalDate.now());
+			patrimonioInterface.setEstado(EstadoConservacao.NOVO);
 
-		Pessoa pessoa = new Pessoa();
+			System.out.println("\n-> Teste Patrimônio (Estado: NOVO):");
+			System.out.println("Data de Aquisição: " + patrimonioInterface.getDataAquisicao());
+			System.out.println(patrimonioInterface.getBuscaConservacao());
 
-		Pessoa pessoaComArgumentos = new Pessoa(1L, "Otávio", "123.456.789-00");
-		System.out.println(pessoaComArgumentos.getNome());
+			// 3. Testando Patrimônio com Estado Nulo
+			Patrimonio patrimonioNulo = new Patrimonio();
+			patrimonioNulo.setBem(new Bem());
+			patrimonioNulo.setDataAquisicao(LocalDate.now());
+			patrimonioNulo.setEstado(null);
 
-		System.out.println(pessoaComArgumentos.getId());
-		System.out.println(pessoaComArgumentos.getNome());
+			System.out.println("\n-> Teste Patrimônio (Estado: NULO):");
+			System.out.println("Data de Aquisição: " + patrimonioNulo.getDataAquisicao());
+			System.out.println(patrimonioNulo.getBuscaConservacao());
 
-		empresa.setPessoa(pessoaComArgumentos);
-		System.out.println(empresa.getPessoa().getCpf());
-		System.out.println(empresa.getPessoa().getNome());
+			// 4. Testando Empresa, Bloco, Pessoa, Sala e Endereco com BuscarEmpresaVinculada
+			Bloco bloco = new Bloco(1L, "Bloco A", empresaInterface);
+			System.out.println(bloco.getEmpresaVinculada());
 
-		Bloco bloco = new Bloco();
+			Pessoa pessoa = new Pessoa(1L, "João Silva", "123.456.789-00");
+			System.out.println(pessoa.getEmpresaVinculada());
 
-		Bloco blocoComArgumentos = new Bloco(2L, "Bloco 1", empresa);
-		System.out.println(blocoComArgumentos.getNome());
+			Sala sala = new Sala(1L, "Sala 101", "QR123", bloco, empresaInterface);
+			System.out.println(sala.getDescricaoLocalzavel());
+			System.out.println(sala.getEmpresaVinculada());
 
-		empresa.setBloco(blocoComArgumentos);
-		System.out.println(empresa.getBloco().getNome());
+			Endereco endereco = new Endereco("Rua das Flores", "123", "Centro", "Cidade Exemplo", "Estado Exemplo", "12345-678");
+			System.out.println(endereco.getEmpresaVinculada());
 
-		Sala sala = new Sala();
-
-		Sala salaComArgumentos = new Sala(1L, "Otávio", "QR Code", bloco, empresa);
-		System.out.println(sala.getNome());
-		System.out.println(salaComArgumentos.getNome());
-
-		Bem bem = new Bem();
-
-		Bem bemComArgumentos = new Bem(2L, "Wilson", "Código: 1234", empresa);
-		System.out.println(bem.getNome());
-		System.out.println(bemComArgumentos.getNome());
-
-		Funcionario funcionario = new Funcionario(
-				35L, "Cleison", "123",
-				Cargo.GERENTE, sala, empresa);
-
-		System.out.println(Pagamento.PIX);
-		System.out.println(PagamentoComposto.PIX.getDescricao());
-		System.out.println(PagamentoComposto.BOLETO.getSituacao());
-
-		Participante participante = new Participante("Otávio", "otaviowgr@gmail.com", "+55 (48) 99912 2525", "Nº de Matrícula: 1", Nivel.AVANCADO);
-		System.out.println("\n- Nome: " + participante.getNome());
-		System.out.println("- Email: " + participante.getEmail());
-		System.out.println("- Telefone: " + participante.getTelefone());
-		System.out.println("- Matricula: " + participante.getMatricula());
-		System.out.println("- Nivel: " + participante.getNivel());
-
-		Evento evento = new Evento(1, "Evento do Otávio", "Minha Casa", StatusEvento.EVENTO_PLANEJADO, participante);
-		System.out.println("\n- Nome do Evento: " + evento.getNome());
-		System.out.println("- Local do Evento: " + evento.getLocal());
-		System.out.println("- Status do Evento: " + evento.getStatus().getDescricao());
-		System.out.println("-Responsável pelo Evento: " + evento.getResponsavel().getNome());
-
-		Curso curso = new Curso(1, "Curso de Programação", "SENAI", StatusEvento.INSCRICOES_ABERTAS, participante, 200, "Hezequias", 10);
-		System.out.println("\n- Nome do Curso: " + curso.getNome());
-		System.out.println("- Local do Curso: " + curso.getLocal());
-		System.out.println("- Status do Curso: " + curso.getStatus().getDescricao());
-		System.out.println("- Carga Horária: " + curso.getCargaHoraria());
-		System.out.println("- Nome do Instrutor: " + curso.getInstrutor());
-		System.out.println("- Quantidade de vagas disponiveis: " + curso.getQuantidadeVagas()); */
-
-		Empresa empresaInterface =  new Empresa();
-
-		Bloco blocoInterface = new Bloco(1L, "Bloco 1", empresaInterface);
-
-		Sala salaInterface = new Sala(2L, "Lab. 2", "45678", blocoInterface, empresaInterface);
-
-		System.out.println(salaInterface.getDescricaoLocalzavel());
-
-		Patrimonio patrimonioInterface = new Patrimonio();
-
-		Bem bemInterface = new Bem();
-		patrimonioInterface.setBem(bemInterface);
-
-		patrimonioInterface.setDataAquisicao(LocalDate.now());
-		patrimonioInterface.setEstado(EstadoConservacao.NOVO);
-
-		System.out.println("Data de Aquisição: " + patrimonioInterface.getDataAquisicao());
-		System.out.println(patrimonioInterface.getBuscaConservacao());
-
-		Bem bemNovaInterface = new Bem();
-		patrimonioInterface.setBem(bemNovaInterface);
-
-		patrimonioInterface.setDataAquisicao(LocalDate.now());
-		patrimonioInterface.setEstado(null);
-
-		System.out.println("Data de Aquisição: " + patrimonioInterface.getDataAquisicao());
-		System.out.println(patrimonioInterface.getBuscaConservacao());
+			System.out.println("\n========================================");
+			System.out.println("FIM DOS TESTES");
+			System.out.println("========================================\n");
+		};
 	}
 }

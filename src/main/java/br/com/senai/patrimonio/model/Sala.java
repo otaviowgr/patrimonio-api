@@ -1,6 +1,6 @@
 package br.com.senai.patrimonio.model;
 
-public class Sala implements Localizavel {
+public class Sala implements Localizavel, BuscarEmpresaVinculada {
     private Long id;
     private String nome;
     private String qrCode;
@@ -62,5 +62,16 @@ public class Sala implements Localizavel {
                             /* SE bloco for DIFERENTE de NULO ENTAO bloco.getNome() SENAO "Sem bloco"*/
         String nomeBloco = bloco != null ? bloco.getNome() : "Sem bloco!";
         return "Sala: " + this.nome + "(Bloco: " +  nomeBloco + ")";
+    }
+
+    @Override
+    public String getEmpresaVinculada() {
+        if (empresa != null) {
+            String nomeEmpresa = empresa.getNome() != null ? empresa.getNome() : "Empresa sem nome";
+            String cnpjEmpresa = empresa.getCnpj() != null ? empresa.getCnpj() : "CNPJ não informado";
+            return "Sala: " + this.nome + ", Empresa: " + nomeEmpresa + ", CNPJ: " + cnpjEmpresa;
+        } else {
+            return "Sala: " + this.nome + ", Empresa: Não vinculada";
+        }
     }
 }
