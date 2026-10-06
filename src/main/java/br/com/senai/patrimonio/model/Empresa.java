@@ -97,4 +97,6 @@ public class Empresa {
     public void setSala(Sala sala) {
         this.sala = sala;
     }
+
 }
+
