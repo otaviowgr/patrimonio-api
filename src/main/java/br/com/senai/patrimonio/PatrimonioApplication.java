@@ -99,6 +99,8 @@ public class PatrimonioApplication {
 		System.out.println("- Nome do Instrutor: " + curso.getInstrutor());
 		System.out.println("- Quantidade de vagas disponiveis: " + curso.getQuantidadeVagas()); */
 
+		//------------------------------------------------------------------------------------------
+
 		Empresa empresaInterface =  new Empresa();
 
 		Bloco blocoInterface = new Bloco(1L, "Bloco 1", empresaInterface);

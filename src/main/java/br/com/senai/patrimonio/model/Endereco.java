@@ -1,6 +1,17 @@
 package br.com.senai.patrimonio.model;
-
-public class Endereco implements BuscarEmpresaVinculada {
+/**
+ * CONCEITO DE POO: ENCAPSULAMENTO + ABSTRACAO
+ * --------------------------------------------
+ * Os campos de endereco (rua, numero, complemento, bairro, cidade, estado)
+ * apareciam soltos dentro de Empresa. Agrupa-los em um objeto de valor
+ * (@Embeddable) encapsula a responsabilidade de "montar um endereco" em
+ * uma unica classe coesa, evitando duplicar esses 6 campos caso outra
+ * entidade precise de endereco no futuro.
+ * <p>
+ * Os atributos sao privados e só podem ser lidos/alterados atraves dos
+ * getters/setters (nenhuma classe externa acessa "rua" diretamente).
+ */
+public class Endereco {
     private String rua;
     private String numero;
     private String complemento;
@@ -8,27 +19,14 @@ public class Endereco implements BuscarEmpresaVinculada {
     private String cidade;
     private String estado;
 
-    /**
-     * CONCEITO DE POO: ENCAPSULAMENTO + ABSTRACAO
-     * --------------------------------------------
-     * Os campos de endereco (rua, numero, complemento, bairro, cidade, estado)
-     * apareciam soltos dentro de Empresa. Agrupa-los em um objeto de valor
-     * (@Embeddable) encapsula a responsabilidade de "montar um endereco" em
-     * uma unica classe coesa, evitando duplicar esses 6 campos caso outra
-     * entidade precise de endereco no futuro.
-     * <p>
-     * Os atributos sao privados e só podem ser lidos/alterados atraves dos
-     * getters/setters (nenhuma classe externa acessa "rua" diretamente).
-     */
+    public Endereco(){}
 
-    public Endereco() {}
-
-    public Endereco(String rua, String numero, String cidade, String bairro, String complemento, String estado) {
+    public Endereco(String rua, String numero, String complemento, String bairro, String cidade, String estado) {
         this.rua = rua;
         this.numero = numero;
-        this.cidade = cidade;
-        this.bairro = bairro;
         this.complemento = complemento;
+        this.bairro = bairro;
+        this.cidade = cidade;
         this.estado = estado;
     }
 
@@ -78,10 +76,5 @@ public class Endereco implements BuscarEmpresaVinculada {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    @Override
-    public String getEmpresaVinculada() {
-        String empresaVinculada = n
     }
 }
