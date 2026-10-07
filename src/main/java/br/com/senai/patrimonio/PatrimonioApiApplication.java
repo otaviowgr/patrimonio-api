@@ -27,23 +27,26 @@ public class PatrimonioApiApplication {
         System.out.println("-------------------------------------------");
 
         // TODO 3: Criar 3 objetos do tipo Funcionario (um Funcionario comum, um Gerente e um Desenvolvedor)
-        Funcionario funcionarioComum = new Funcionario("Richard", 2000.00);
+        Funcionario funcionarioComum = new Funcionario("Funcionario Comum", 2000.00);
         Funcionario gerente  = new Funcionario("Gerente", 7000.00);
         Funcionario desenvolvedor = new Funcionario("Desenvolvedor", 11000.00);
 
         // TODO 4: Chamar o método imprimirContraCheque(...) para cada um dos 3 funcionários criados
+        imprimirContraCheque(funcionarioComum);
+        imprimirContraCheque(gerente);
+        imprimirContraCheque(desenvolvedor);
+    }
 
+    // Método auxiliar que demonstra o polimorfismo
+    public static void imprimirContraCheque(Funcionario f) {
+        System.out.println("Funcionário: " + f.getNome());
+        System.out.println("Salário Base: " + f.getSalarioBase() + " R$");
 
-        // Método auxiliar que demonstra o polimorfismo
-        public static void imprimirContraCheque(Funcionario f) {
-            System.out.println("Funcionário: " + f.getNome());
-            System.out.println("Salário Base: R$ " + f.getSalarioBase());
+        // TODO 3: Imprimir a bonificação chamando f.calcularBonificacao()
+        System.out.println("- Bonificação: " + f.calcularBonificacao() + " R$");
 
-            // TODO 3: Imprimir a bonificação chamando f.calcularBonificacao()
-
-            // TODO 4: Imprimir o Salário Total (Salário Base + Bonificação)
-
-            System.out.println("-------------------------------------------");
-        }
+        // TODO 4: Imprimir o Salário Total (Salário Base + Bonificação)
+        System.out.println("- Salário Base + Bonificação: " + (f.getSalarioBase() + f.calcularBonificacao()) + " R$");
+        System.out.println("-------------------------------------------");
     }
 }
